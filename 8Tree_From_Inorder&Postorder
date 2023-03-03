@@ -1,0 +1,36 @@
+BinaryTreeNode<int>* buildTreeHelper(int *postorder, int*  inorder, int inS,  int inE, int postS, int postE)
+{
+	if(inS>inE){
+		return NULL;
+	}
+	int rootData=postorder[postE];
+	int rootIndex=-1;
+	for(int i=inS; i<=inE; i++)
+	{
+		if(inorder[i]==rootData)
+		{
+			rootIndex=i;
+			break;
+		}
+	}
+	int linS=inS;
+	int linE=rootIndex-1;
+	int lpostS=postS;
+	int lpostE=linE-linS+lpostS;
+	int rinS=rootIndex+1;
+	int rinE=inE;
+	int rpostS=lpostE+1;
+	int rpostE=postE-1;
+
+	BinaryTreeNode<int>* root= new BinaryTreeNode<int>(rootData);
+	root->left=buildTreeHelper(postorder, inorder, linS, linE, lpostS, lpostE);
+	root->right=buildTreeHelper(postorder, inorder, rinS, rinE, rpostS, rpostE);
+	return root;
+}
+
+
+BinaryTreeNode<int> *buildTree(int *postorder, int postLength, int *inorder,
+                               int inLength) {
+  // Write your code here
+        return buildTreeHelper(postorder, inorder, 0 , inLength-1, 0, postLength-1);
+}
