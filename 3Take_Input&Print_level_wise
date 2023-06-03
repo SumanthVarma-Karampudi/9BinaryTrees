@@ -41,4 +41,36 @@ BinaryTreeNode<int>* 3TakeInputLevelWise(){
   }
 ---------------------------------------------print Input level wise-------------------------------------------------------------------------
 
-
+#include<queue>
+void printLevelWise(BinaryTreeNode<int> *root) {
+	// Write your code here
+	if(root==NULL)
+	{
+		return ;
+	}
+	queue<BinaryTreeNode<int>*> PendingNodes;
+	PendingNodes.push(root);
+	while(PendingNodes.size() != 0){
+		BinaryTreeNode<int>* front=PendingNodes.front();
+		PendingNodes.pop();
+		cout<<front->data<<":";
+		if(front->left != NULL)
+		{
+			cout<<"L:"<<front->left->data<<",";
+			PendingNodes.push(front->left);
+		}
+		else
+		{
+			cout<<"L:"<<"-1"<<",";
+		}
+		if(front->right != NULL)
+		{
+			cout<<"R:"<<front->right->data<<endl;
+			PendingNodes.push(front->right);
+		}
+		else
+		{
+			cout<<"R:"<<"-1"<<endl;
+		}
+		}
+}
