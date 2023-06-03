@@ -1,8 +1,0 @@
-int NumNodes(BinaryTreeNode<int>* root)
-{
-  if(root==NULL)
-  { 
-    return 0;
-  }
-  return 1+NumNodes(root->left)+NumNodes(root->right);
-}
