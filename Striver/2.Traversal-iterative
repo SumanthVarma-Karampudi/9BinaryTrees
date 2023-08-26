@@ -1,2 +1,42 @@
-Iterative preorder:
-  
+1.Iterative Preorder(root left right): push right first and left second so the left will be in the top as it is pre order.
+
+  vector < int > preOrderTrav(node * curr) {
+    vector < int > preOrder;
+    if (curr == NULL)
+      return preOrder;
+    stack < node * > s;
+    s.push(curr);
+    while (!s.empty()) {
+      node * topNode = s.top();
+      preOrder.push_back(topNode -> data);
+      s.pop();
+      if (topNode -> right != NULL)
+        s.push(topNode -> right);
+      if (topNode -> left != NULL)
+        s.push(topNode -> left);
+    }
+    return preOrder;
+  }
+
+
+2.Iterative Inorder: first take root, if root is not null, push into stack and call left else if it is null, go to stack check if it empty(break), if not push_back current element into vector and call right;
+
+  vector < int > inOrderTrav(node * curr) {
+  vector < int > inOrder;
+  stack < node * > s;
+  while (true) {
+    if (curr != NULL) {
+      s.push(curr);
+      curr = curr -> left;
+    } else {
+      if (s.empty()) break;
+      curr = s.top();
+      inOrder.push_back(curr -> data);
+      s.pop();
+      curr = curr -> right;
+    }
+  }
+  return inOrder;
+}
+
+3.Iterative Postorder(using 2 stack):
